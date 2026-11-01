@@ -7,4 +7,4 @@ let myBigInt = 112n;
 const addTwo = (a, b) => {
     return a + b;
 };
-console.log(addTwo(12, 34));
+console.log(addTwo(10, 30));
