@@ -240,3 +240,88 @@ const formattedString = formatInput("  hello world  ");
 console.log(formattedString); // Output: "HELLO WORLD"
 const formattedNumber = formatInput(123.345);
 console.log(formattedNumber); // Output: 123.34
+
+
+// Type Guards typeof
+
+function printValue(val: string | number) {
+    if (typeof val === "string") {
+        console.log(val.toUpperCase());
+    } else {
+        console.log(val.toFixed(2));
+    }
+}
+
+// Operator Guard
+
+type Admin1 = {
+    name: string;
+    adminLevel: number;
+};
+type User1 = {
+    name: string;
+    email: string;
+};
+
+function loginMessage(person: Admin1 | User1) {
+    if ("adminLevel" in person) {
+        return `Welcome Admin ${person.name}, Level: ${person.adminLevel}`;
+    } else {
+        return `Welcome User ${person.name}, Email: ${person.email}`;
+    }
+}
+
+// Instanceof Guard
+
+class Dog {
+    bark() {
+        console.log("Woof! Woof!");
+    }
+}
+
+class Cat {
+    meow() {
+        console.log("Meow! Meow!");
+    }
+}
+
+function makeAnimalSound(animal: Dog | Cat) {
+    if (animal instanceof Dog) {
+        animal.bark();
+    } else {
+        animal.meow();
+    }
+}
+
+// The satisfies Operator
+
+type Colors = "red" | "green" | "blue";
+
+const palette = {
+    primary: "red",
+    secondary: "green",
+    tertiary: "blue"
+} satisfies Record<string, Colors>;
+
+// Palette.primary is guaranteed to be one of the Colors type, ensuring type safety.
+
+function getColor(color: Colors) {
+
+    return `You selected the color: ${color}`;
+
+}
+
+//Day 4 - practice
+
+const processId = (id: string | number) : string => {
+    if(typeof id === "string" ) {
+        return `The ID is a string: ${id.trim().toUpperCase()}`;
+    }else   {
+        return `The ID is a number: ${id * 23}`;
+    }
+}
+
+const result1 = processId("  abc123  ");
+const result2 = processId(456);
+console.log(result1); // Output: The ID is a string: ABC123
+console.log(result2); // Output: The ID is a number: 10488
